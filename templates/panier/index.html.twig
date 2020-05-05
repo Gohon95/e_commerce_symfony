@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Compte{% endblock %}
+
+{% block body %}
+    <h1>{{'Moncompte.Moncompte'|trans}}</h1>
+    <br />
+        <h2>{{'Moncompte.Historique'|trans}}</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{'Moncompte.Id'|trans}}</th>
+                <th>{{'Moncompte.Montant'|trans}}</th>
+                <th>{{'Moncompte.Date'|trans}}</th>
+                <th>{{'Moncompte.Actions'|trans}}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for panier in paniers %}
+            <tr>
+                <td>{{ panier.id }}</td>
+                <td>{{ panier.totalAmount}}</td>
+                <th>{{panier.dateAchat | date() }}</th>
+                <td>
+                    <a href="{{ path('panier_show', {'id': panier.id}) }}">show</a>
+                    <a href="{{ path('panier_edit', {'id': panier.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('panier_new') }}">Create new</a>
+{% endblock %}

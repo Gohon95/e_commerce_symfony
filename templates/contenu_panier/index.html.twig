@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+    <h1>{{'contenupanier.Monpanier'|trans}}</h1>
+    <p> Vous avez {{contenu_paniers|length}} Produits</p>
+    {% set prixtotal = 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{'contenupanier.Nom'|trans}}</th>
+                <th>{{'contenupanier.Quantite'|trans}}</th>
+                <th>{{'contenupanier.Prix'|trans}}</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contenu_panier in contenu_paniers %}
+            <tr>
+                <td>{{ contenu_panier.produit.nom }}</td>
+                <td>{{ contenu_panier.quantite }}</td>
+                {% set prixProduit = contenu_panier.produit.prix * contenu_panier.quantite %}
+                <td>{{ contenu_panier.produit.prix }}</td>
+                {% set prixtotal = prixtotal + prixProduit %}
+                <td>{{ include('contenu_panier/_delete_form.html.twig') }}</td>
+                <td>
+                    {% if is_granted('ROLE_ADMIN','ROLE_SUPER_ADMIN') %}
+                    <a href="{{ path('contenu_panier_show', {'id': contenu_panier.id}) }}">{{'contenupanier.Montrer'|trans}}</a>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN','ROLE_SUPER_ADMIN') %}
+                    <a href="{{ path('contenu_panier_edit', {'id': contenu_panier.id}) }}">{{'contenupanier.Editer'|trans}}</a>
+                    {% endif %}
+                </td>
+                
+            </tr>
+            <td>
+			    <a type="button" class="btn btn-success" href="{{path('contenu_panier_new')}}">{{'panier.Acheter'|trans}}</a>
+			</td>
+            <td>
+					<a type="button" class="btn btn-secondary disabled" href="{{path('contenu_panier_new')}}">{{'panier.Dejaacheter'|trans}}</a>
+				</td>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun article</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        <td>Total : {{prixtotal}}</td>
+
+    {% if is_granted('ROLE_ADMIN','ROLE_SUPER_ADMIN') %}
+    <a href="{{ path('contenu_panier_new') }}">{{'contenupanier.Ajouter'|trans}}</a>
+    {% endif %}
+
+{% endblock %}

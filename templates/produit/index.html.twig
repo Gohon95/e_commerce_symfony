@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    {% if app.user is not null %}
+        <h1>Bonjour, {{ app.user.username|capitalize }} </h1>
+    {% endif %}
+    <h1>{{'produit.titre'|trans}}</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{'produit.Nom'|trans}}</th>
+                <th>{{'produit.Description'|trans}}</th>
+                <th>{{'produit.Prix'|trans}}</th>
+                <th>{{'produit.Photo'|trans}}</th>
+                {% if is_granted('ROLE_ADMIN','ROLE_SUPER_ADMIN') %}
+                <th>actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.nom }}</td>
+                <td>{{ produit.description }}</td>
+                <td>{{ produit.prix }}€</td>
+                <td>
+                    <a href="{{ path('produit_show', {'id': produit.id}) }}">
+                        <img src="{{ asset('uploads/' ~ produit.photo) }}" style="width: 350px">
+                        </a>
+                </td>
+                <td>
+                    
+                    {% if is_granted('ROLE_ADMIN','ROLE_SUPER_ADMIN') %}
+                    <a href="{{ path('produit_edit', {'id': produit.id}) }}">Editer</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if is_granted('ROLE_ADMIN','ROLE_SUPER_ADMIN') %}
+
+    <a href="{{ path('produit_new') }}">Crée un nouveau produit</a>
+
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,51 @@
+titre: "Créer un nouveau produit"
+Nom: "Nom"
+Quantite: "Quantite"
+Prix: "Prix"
+Aperçu du produit: "Aperçu du produit"
+Sauvegarder: "Save"
+Accueil: "Accueil"
+
+produit:
+  produit: "Produit"
+  titre: "Liste de Produits"
+  Nom: "Nom"
+  Photo: "Photo"
+  Description: "Description"
+  Actions: "Actions"
+  Prix: "Prix"
+  Créer: "Créer"
+  supprimer: "Supprimer"
+  noproduit: "Il n'y a pas de produit. Veuillez ajouter un produit."
+  modifier: "Modifier"
+
+panier:
+  titre: Panier
+  Panier: "Panier"
+  Date: "Date"
+  Etat: "Etat"
+  Actions: "Actions"
+  Acheter: "Acheter"
+  Dejaacheter: "Déjà acheter"
+
+contenupanier:
+  Monpanier: "Mon panier"
+  Nom: "Nom"
+  Quantite: "Quantite"
+  Date_ajout: "Date de la commande"
+  Prix: "Prix"
+  Actions: "Actions"
+  Ajouter: "Ajouter"
+  Montrer: 'Montrer'
+  Editer: "Editer"
+  Montant: "Montant de la commande"
+  Id: "Identifiant de la commande"
+  Vousavez: "Vous avez"
+
+Moncompte:
+  Moncompte: "Mon compte"
+  Historique: "Historique de mes commandes"
+  Id: "Identifiant de la commande"
+  Montant: "Montant de la commande"
+  Date: "Date commande"
+  Actions: "Actions"
